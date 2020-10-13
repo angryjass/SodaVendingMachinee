@@ -1,0 +1,228 @@
+﻿<div class="wrapper">
+    <div class="svm">
+        <div class="windowWithSoda">
+            <div class="drinkStand">
+                <div class="soda" *ngFor="let s of sodaArr" (click)="buySoda(s)">
+                    <div class="sodaImgBorder"><img [src]="s?.img" class="sodaImg" /></div>
+                    {{s?.name}}
+                    <br />
+                    {{s?.price}}р.
+                </div>
+            </div>
+            <!--<div class="windowWithSodaGlass">
+
+            </div>-->
+        </div>
+        <div class="infoWindow">
+            <div ngClass="infoText">
+                {{infoText}}
+            </div>
+        </div>
+        <div class="coinsSumWindow">
+            <div class="coinsSumWindowText">СУММА:</div><div class="coinsSumText">{{coinsSum}}</div><div class="coinsSumText" *ngIf="sodaSum > 0"> - {{sodaSum}}</div>
+        </div>
+        <div class="coins">
+            <div class="coin" *ngFor="let c of coinArr" (click)="addCoinToSum(getNumber(c?.name), $event)" [class.coin]="!c?.isLocked" [class.lockedCoin]="c?.isLocked">
+                <div class="coinText" onselectstart="return false" [class.coinText]="!c?.isLocked" [class.lockedCoinText]="c?.isLocked">
+                    {{this.getNumber(c?.name)}}
+                </div>
+            </div>
+        </div>
+        <div class="change" (click)="giveChange()">
+            <div class="changeText" onselectstart="return false">
+                СДАЧА
+            </div>
+        </div>
+    </div>
+</div>
+
+<style scoped>
+    .drinkStand{
+        
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .soda {
+        margin: 30px 5px;
+        display: inline-table;
+        color: white;
+    }
+
+        .soda:hover .sodaImg {
+            border: 3px solid black;
+        }
+
+    .sodaImgBorder {
+        width: 100px;
+        min-height: 100px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+    }
+
+    .sodaImg {
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        min-height: 100px;
+        max-width: 100%;
+        display: block;
+    }
+
+    .svm {
+        margin: 100px auto 0px;
+        width: 700px;
+        height: 800px;
+        display: block;
+        display: inline-block;
+        background-color: lightgray;
+        border: 3px solid black;
+    }
+
+    .wrapper {
+        width: auto;
+        height: auto;
+        vertical-align: central;
+        text-align: center;
+    }
+
+    .windowWithSoda {
+        margin: 100px 0px 0px 10px;
+        width: 490px;
+        height: 590px;
+        background-color: #2E2E2E;
+        border-radius: 30px;
+        display: inline-block;
+        float: left;
+    }
+
+    .windowWithSodaGlass {
+        position: fixed;
+        width: 490px;
+        height: 590px;
+        background-color: dodgerblue;
+        border-radius: 30px;
+        opacity: 0.1;
+        float: left;
+    }
+
+    .infoWindow {
+        margin: 150px 10px 0px 10px;
+        width: 150px;
+        height: 100px;
+        background-color: black;
+        display: inline-block;
+        float: right;
+        color: lawngreen;
+        padding: 1px;
+    }
+
+    .infoText {
+        display: block;
+        vertical-align: middle;
+        width: 150px;
+        max-height: 100px;
+        position: relative;
+        overflow-y: auto;
+    }
+
+    .coins {
+        margin: 30px 0px 0px 10px;
+        float: right;
+        width: 170px;
+        height: auto;
+    }
+
+    .coin {
+        margin: 3px;
+        display: inline-block;
+        background-color: yellow;
+        color: black;
+        width: 35px;
+        height: 35px;
+        border-radius: 30px;
+    }
+
+    .lockedCoin {
+        margin: 3px;
+        display: inline-block;
+        background-color: grey;
+        color: black;
+        width: 35px;
+        height: 35px;
+        border-radius: 30px;
+    }
+
+    .coinText {
+        display: table-cell;
+        vertical-align: middle;
+        width: 35px;
+        height: 35px;
+        border-radius: 30px;
+    }
+
+        .coinText:hover {
+            border: 3px solid black;
+        }
+
+    .lockedCoinText {
+        display: table-cell;
+        vertical-align: middle;
+        width: 35px;
+        height: 35px;
+        border-radius: 30px;
+    }
+
+    .coinsSumWindow {
+        margin: 10px 10px 0px 10px;
+        width: 150px;
+        height: 30px;
+        background-color: black;
+        display: inline-block;
+        float: right;
+        text-align: left;
+        padding: 0px 3px;
+        color: lawngreen;
+    }
+
+    .coinsSumWindowText {
+        display: table-cell;
+        vertical-align: middle;
+        width: 70px;
+        height: 30px;
+    }
+
+    .coinsSumText {
+        display: table-cell;
+        vertical-align: middle;
+        width: 40px;
+        height: 30px;
+        text-wrap: none;
+    }
+
+    .change {
+        margin: 0px 10px;
+        width: 70px;
+        height: 30px;
+        background-color: grey;
+        display: inline-block;
+        float: right;
+        text-align: center;
+        color: black;
+    }
+
+    .changeText {
+        display: table-cell;
+        vertical-align: middle;
+        width: 70px;
+        height: 30px;
+    }
+
+        .changeText:hover {
+            border: 3px solid black;
+        }
+</style>

@@ -1,0 +1,148 @@
+﻿<table>
+    <tr>
+        <td style="min-width:700px; vertical-align:top">
+            <div class="table-striped-soda">
+                <h1>Список напитков</h1>
+                <table *ngIf="tableMode; else create" class="table table-striped table-striped-soda">
+                    <thead *ngIf="sodaArr">
+                        <tr>
+                            <td>Изображение</td>
+                            <td>Название</td>
+                            <td>Цена</td>
+                            <td>Количество</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of sodaArr">
+                            <ng-template [ngIf]="sodaDto?.id != s.id" [ngIfElse]="edit">
+                                <td><div class="sodaImageBorder"><img [src]="s?.img" class="sodaImage" /></div></td>
+                                <td>{{s?.name}}</td>
+                                <td>{{s?.price}}</td>
+                                <td>{{s?.value}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" (click)="editSoda(s)">Изменить</button>
+                                    <button class="btn btn-sm btn-danger" (click)="delete(s)">Удалить</button>
+                                </td>
+                            </ng-template>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <input type="button" value="Добавить" *ngIf="tableMode" style="float:right" class="btn btn-default" (click)="add()" />
+            </div>
+        </td>
+        <td style="min-width:700px; vertical-align:top">
+            <div class="table-striped-coins">
+                <h1>Монеты в автомате</h1>
+                <table class="table table-striped table-striped-coins">
+                    <thead>
+                        <tr>
+                            <td>
+                                Монета
+                            </td>
+                            <td>
+                                Количество
+                            </td>
+                            <td>
+                                Заблокировано
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <ng-template [ngIf]="!coinsEdit" [ngIfElse]="editCoin">
+                            <tr *ngFor="let c of coinArr">
+                                <td>{{c?.name}}</td>
+                                <td>{{c.value}}</td>
+                                <td><input type="checkbox" [(ngModel)]="c.isLocked" disabled="disabled" /></td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <br />
+                <input type="button" value="Изменить" class="btn btn-sm btn-primary" style="float:right" (click)="editCoins()" *ngIf="!coinsEdit" />
+                <input type="submit" value="Сохранить изменения" class="btn btn-sm btn-success" style="float:right" (click)="updateCoinsStorages()" *ngIf="coinsEdit" />
+            </div>
+        </td>
+    </tr>
+</table>
+
+<!--шаблон для редактирования-->
+<ng-template #edit>
+    <td>
+        <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="imgChange($event)" class="form-control">
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sodaDto.name" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sodaDto.price" pattern="^[ 0-9]+$" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sodaDto.value" pattern="^[ 0-9]+$" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="updateSoda()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
+</ng-template>
+<ng-template #editCoin>
+    <tr *ngFor="let c of coinArr">
+        <td>{{c?.name}}</td>
+        <td><input type="text" name="coinsValue" [(ngModel)]="c.value" pattern="^[ 0-9]+$" class="form-control" /></td>
+        <td><input type="checkbox" [(ngModel)]="c.isLocked" /></td>
+    </tr>
+</ng-template>
+
+<!--шаблон для добавления-->
+<ng-template #create>
+    <div class="form-group">
+        <label>Изображение</label>
+        <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="imgChange($event)" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Название</label>
+        <input type="text" [(ngModel)]="sodaDto.name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Цена</label>
+        <input type="text" [(ngModel)]="sodaDto.price" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Количество</label>
+        <input type="text" [(ngModel)]="sodaDto.value" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="createSoda()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
+</ng-template>
+
+<style scoped>
+    .table-striped-coins{
+        max-width: 700px;
+        display:inline-block;
+    }
+    .table-striped-soda{
+        max-width: 700px;
+        display:inline-block;
+    }
+    .sodaImageBorder {
+        width: 60px;
+        height: auto;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: 50%;
+        background-position-y: 50%;
+    }
+
+    .sodaImage {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        max-height: 100%;
+        max-width: 100%;
+        display: block;
+    }
+</style>

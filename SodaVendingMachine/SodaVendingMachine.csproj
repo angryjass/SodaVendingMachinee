@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App_Client\svm.admin\svm.admin.component.ts" />
+    <None Remove="App_Client\data.service.ts" />
+    <None Remove="App_Client\main.ts" />
+    <None Remove="App_Client\models\coins.ts" />
+    <None Remove="App_Client\models\coinsStorageDto.ts" />
+    <None Remove="App_Client\models\Soda.ts" />
+    <None Remove="App_Client\models\sodaStorageDto.ts" />
+    <None Remove="App_Client\polyfills.ts" />
+    <None Remove="App_Client\svm.client\svm.client.component.ts" />
+    <None Remove="App_Client\svm.module.ts" />
+    <None Remove="App_Client\svm.router.ts" />
+    <None Remove="Startup.cs~RF54179e5.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.7.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Web.Administration" Version="11.1.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App_Client\models\coins.js">
+      <DependentUpon>coins.ts</DependentUpon>
+    </None>
+    <None Update="App_Data\SodaVendingMachine.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="App_Data\SodaVendingMachine_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Update="App_Client\models\coins.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Update="App_Client\models\sodaStorageDto.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+</Project>
