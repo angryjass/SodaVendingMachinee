@@ -21,7 +21,9 @@ namespace SodaVendingMachine.Repositories
 
             foreach (var s in soda)
             {
+
                 var ss = context.SodaStorage.FirstOrDefault(a => a.SodaId == s.Id);
+
 
                 sodaStorages.Add(new SodaStorageDto
                 {
@@ -34,6 +36,8 @@ namespace SodaVendingMachine.Repositories
             }
             return sodaStorages;
         }
+
+
 
         public void DeleteSoda(int id)
         {
