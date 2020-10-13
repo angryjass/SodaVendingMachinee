@@ -27,17 +27,11 @@ namespace SodaVendingMachine.Repositories
 
                 sodaStorages.Add(new SodaStorageDto
                 {
-
-
-
                     Id = ss.Id,
                     Name = s.Name,
                     Price = s.Price,
                     Img = s.Img,
                     Value = ss.Value,
-
-
-
                 });
             }
             return sodaStorages;
