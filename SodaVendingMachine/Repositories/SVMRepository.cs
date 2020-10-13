@@ -17,6 +17,8 @@ namespace SodaVendingMachine.Repositories
         {
             var soda = context.Soda.ToList();
             List<SodaStorageDto> sodaStorages = new List<SodaStorageDto>();
+
+
             foreach (var s in soda)
             {
                 var ss = context.SodaStorage.FirstOrDefault(a => a.SodaId == s.Id);
